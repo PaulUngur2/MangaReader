@@ -1,6 +1,6 @@
 @import '../../../styles.scss';
 
-.comics {
+.manga {
     height: 100%;
     width: 20%;
 
@@ -11,27 +11,16 @@
 
     margin: 10px 0;
 
-    .comics__img {
+    .manga_img {
         margin-bottom: 2%;
     }
 
-    .comics__btn {
-        display: flex;
-        flex-direction: column;
-
-        .p-button {
-            width: 270px;
-            margin-bottom: 5%;
-            display: flex;
-            justify-content: center;
-
-            ::ng-deep .p-button-label {
-                flex: none;
-            }
-        }
+    .cover {
+        width: 270px;
+        height: 405px;
     }
-
-    .comics__info {
+    
+    .manga_info {
         width: 270px;
 
         background-color: #212121;
@@ -48,9 +37,31 @@
             }
 
             .text {
+                text-transform: capitalize;
                 font-size: 16px;
                 font-weight: 400;
                 line-height: 22px;
+            }
+
+            .tags {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+
+                .tag {
+                    margin-right: 5px;
+                    padding: 2px 5px;
+
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 16px;
+                    color: #83848f;
+
+                    background-color: #212121;
+                    border-radius: 5px;
+                }
+            
             }
         }
     }
@@ -85,10 +96,14 @@
         color: #83848f;
     }
 
+    .text-formating {
+        text-transform: uppercase;
+    }
+
     .tab {
 
 
-        .about {
+        .description {
             font-size: 16px;
             font-weight: 400;
             line-height: 26px;

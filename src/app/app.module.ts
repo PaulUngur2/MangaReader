@@ -14,6 +14,8 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, MainComponent],
@@ -26,7 +28,8 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
     HttpClientModule,
     TableModule,
     DialogModule,
-    PdfJsViewerModule
+    PdfJsViewerModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

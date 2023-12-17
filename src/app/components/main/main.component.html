@@ -1,49 +1,97 @@
-<div class="comics">
-    <div class="comics__img">
-        <img src="../../../assets/img/comics.jpg" alt="Comics">
+<div class="manga">
+    <div class="manga_img">
+        <img src="{{mangaList[0].coverArtSrc}}" alt="manga" class="cover">
     </div>
-    <div class="comics__btn">
-        <button pButton pRipple type="button" label="Начать чтение" class="p-button-info" icon="pi pi-book"></button>
-        <button pButton pRipple type="button" label="Отслеживать" class="p-button-warning" icon="pi pi-check"></button>
-        <button pButton pRipple type="button" label="Добавить в закладки" class="p-button-success"
-            icon="pi pi-bookmark"></button>
-        <button pButton pRipple type="button" label="Пожаловаться" class="p-button-text"
-            icon="pi pi-exclamation-circle"></button>
-    </div>
-    <div class="comics__info">
+    <div class="manga_info">
         <div class="label">
             <div class="title">
-                Год:
+                Artist:
             </div>
             <div class="text">
-                {{comics[0]?.year}}
+                {{mangaList[0].artist}}
             </div>
         </div>
 
         <div class="label">
             <div class="title">
-                Издатель:
+                Author:
             </div>
             <div class="text">
-                {{comics[0]?.publishing}}
+                {{mangaList[0].author}}
             </div>
         </div>
 
         <div class="label">
             <div class="title">
-                Тип выпуска:
+                Demographic:
             </div>
             <div class="text">
-                {{comics[0]?.type}}
+                {{mangaList[0].publicationDemographic}}
             </div>
         </div>
 
         <div class="label">
             <div class="title">
-                Статус:
+                Original Language:
             </div>
             <div class="text">
-                {{comics[0]?.status}}
+                {{mangaList[0].originalLanguage}}
+            </div>
+        </div>
+
+        <div class="label">
+            <div class="title">
+                Tags:
+            </div>
+            <div class="tags">
+                <div class="text">
+                    {{mangaList[0].tags.join(', ')}}
+                </div>
+            </div>
+        </div>
+
+        <div class="label">
+            <div class="title">
+                Year:
+            </div>
+            <div class="text">
+                {{mangaList[0].year}}
+            </div>
+        </div>
+
+        <div class="label">
+            <div class="title">
+                Release Type:
+            </div>
+            <div class="text">
+                {{mangaList[0].type}}
+            </div>
+        </div>
+
+        <div class="label">
+            <div class="title">
+                Status:
+            </div>
+            <div class="text">
+                {{mangaList[0].status}}
+            </div>
+        </div>
+
+        <div class="label">
+            <div class="title">
+                Content Rating:
+            </div>
+            <div class="text">
+                {{mangaList[0].contentRating}}
+            </div>
+        </div>
+
+        <div class="label">
+            <div class="title">
+                State:
+            </div>
+            <div class="text">
+                {{mangaList[0].state}}
             </div>
         </div>
     </div>
@@ -51,24 +99,24 @@
 
 <div class="content">
     <div class="big-title">
-        <h1>{{comics[0]?.title}}</h1>
+        <h1 class="text-formating">{{mangaList[0].title}}</h1>
     </div>
     <div class="small-title">
-        {{comics[0]?.engTitle}}
+        {{mangaList[0].title_ja}} {{mangaList[0].title_ja_ro}}
     </div>
     <div class="tab">
         <p-tabView>
-            <p-tabPanel header="Описание">
-                <div class="about">{{comics[0]?.about}}</div>
+            <p-tabPanel header="Description">
+                <div class="description" [innerHTML]="markdown"></div>
             </p-tabPanel>
-            <p-tabPanel header="Главы ({{comics[0]?.sections.length}})">
+            <p-tabPanel header="Chapters ({{0}})">
 
-                <p-table [value]="comics[0]?.sections" responsiveLayout="scroll">
+                <p-table  responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
                             <th [width]="100">ID</th>
-                            <th [width]="700">Номер</th>
-                            <th [width]="100">Страницы</th>
+                            <th [width]="700">Number</th>
+                            <th [width]="100">Pages</th>
                             <th [width]="100"></th>
                         </tr>
                     </ng-template>
@@ -78,7 +126,7 @@
                             <td>{{section.section}}</td>
                             <td>{{section.pages}}</td>
                             <td>
-                                <p-button icon="pi pi-eye" (onClick)="openComics(section)"></p-button>
+                                <p-button icon="pi pi-eye" (onClick)="openmanga(section)"></p-button>
                             </td>
                         </tr>
                     </ng-template>
@@ -90,8 +138,8 @@
 </div>
 
 
-<p-dialog header={{numberOfComics}} [(visible)]="displayBasic" [style]="{height: '100vh',width: '50vw'}">
-    <div [ngSwitch]="urlOfComics" style="height:100%">
+<p-dialog header={12} [(visible)]="displayBasic" [style]="{height: '100vh',width: '50vw'}">
+    <!-- <div  style="height:100%">
         <ng-template ngSwitchCase="1" style="height:100%">
             <ng2-pdfjs-viewer pdfSrc="/assets/First.pdf"></ng2-pdfjs-viewer>
         </ng-template>
@@ -99,13 +147,18 @@
             <ng2-pdfjs-viewer pdfSrc="/assets/Second.pdf"></ng2-pdfjs-viewer>
         </ng-template>
         <ng-template ngSwitchCase="3" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Thirth.pdf"></ng2-pdfjs-viewer>
+            <ng2-pdfjs-viewer pdfSrc="/assets/Third.pdf"></ng2-pdfjs-viewer>
         </ng-template>
         <ng-template ngSwitchCase="4" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Fouth.pdf"></ng2-pdfjs-viewer>
+            <ng2-pdfjs-viewer pdfSrc="/assets/Fourth.pdf"></ng2-pdfjs-viewer>
         </ng-template>
         <ng-template ngSwitchCase="5" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Fisth.pdf"></ng2-pdfjs-viewer>
+            <ng2-pdfjs-viewer pdfSrc="/assets/Fifth.pdf"></ng2-pdfjs-viewer>
         </ng-template>
-    </div>
+    </div> -->
 </p-dialog>
+
+<form action="https://v2.convertapi.com/convert/pages/to/pdf?Secret=0iZd3gNyLIZJZWEA&download=attachment" method="post" enctype="multipart/form-data">
+    <input type="file" name="File" />
+    <input type="submit" value="Convert file"/>
+</form>
