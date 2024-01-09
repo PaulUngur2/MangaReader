@@ -1,6 +1,6 @@
 <div class="manga">
     <div class="manga_img">
-        <img src="{{mangaList[0].coverArtSrc}}" alt="manga" class="cover">
+        <img src="{{manga.coverArtSrc}}" alt="manga" class="cover">
     </div>
     <div class="manga_info">
         <div class="label">
@@ -8,7 +8,7 @@
                 Artist:
             </div>
             <div class="text">
-                {{mangaList[0].artist}}
+                {{manga.artist}}
             </div>
         </div>
 
@@ -17,7 +17,7 @@
                 Author:
             </div>
             <div class="text">
-                {{mangaList[0].author}}
+                {{manga.author}}
             </div>
         </div>
 
@@ -26,7 +26,7 @@
                 Demographic:
             </div>
             <div class="text">
-                {{mangaList[0].publicationDemographic}}
+                {{manga.publicationDemographic}}
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                 Original Language:
             </div>
             <div class="text">
-                {{mangaList[0].originalLanguage}}
+                {{manga.originalLanguage}}
             </div>
         </div>
 
@@ -45,7 +45,7 @@
             </div>
             <div class="tags">
                 <div class="text">
-                    {{mangaList[0].tags.join(', ')}}
+                    {{manga.tags.join(', ')}}
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                 Year:
             </div>
             <div class="text">
-                {{mangaList[0].year}}
+                {{manga.year}}
             </div>
         </div>
 
@@ -64,7 +64,7 @@
                 Release Type:
             </div>
             <div class="text">
-                {{mangaList[0].type}}
+                {{manga.type}}
             </div>
         </div>
 
@@ -73,7 +73,7 @@
                 Status:
             </div>
             <div class="text">
-                {{mangaList[0].status}}
+                {{manga.status}}
             </div>
         </div>
 
@@ -82,7 +82,7 @@
                 Content Rating:
             </div>
             <div class="text">
-                {{mangaList[0].contentRating}}
+                {{manga.contentRating}}
             </div>
         </div>
 
@@ -91,7 +91,7 @@
                 State:
             </div>
             <div class="text">
-                {{mangaList[0].state}}
+                {{manga.state}}
             </div>
         </div>
     </div>
@@ -99,10 +99,10 @@
 
 <div class="content">
     <div class="big-title">
-        <h1 class="text-formating">{{mangaList[0].title}}</h1>
+        <h1 class="text-formating">{{manga.title}}</h1>
     </div>
     <div class="small-title">
-        {{mangaList[0].title_ja}} {{mangaList[0].title_ja_ro}}
+        {{manga.title_ja}} {{manga.title_ja_ro}}
     </div>
     <div class="tab">
         <p-tabView>
@@ -126,7 +126,7 @@
                             <td>{{section.section}}</td>
                             <td>{{section.pages}}</td>
                             <td>
-                                <p-button icon="pi pi-eye" (onClick)="openmanga(mangaList[0].id)"></p-button>
+                                <p-button icon="pi pi-eye" (onClick)="openmanga(manga.id)"></p-button>
                             </td>
                         </tr>
                     </ng-template>

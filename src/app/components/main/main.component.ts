@@ -10,8 +10,9 @@ import { Chapter } from 'src/app/chapter';
 import { ChapterPages } from 'src/app/chapter-pages';
 import { Manga } from 'src/app/manga';
 import { MangaAPIService } from 'src/app/manga-api.service';
-import * as pdfMake from "pdfmake/build/pdfmake"; 
+import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import {SharedDataService} from "../../shared-data.service";
 
 @Component({
   selector: 'app-main',
@@ -20,26 +21,26 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 })
 export class MainComponent implements OnInit{
   mangaApi = inject(MangaAPIService);
-  mangaList: Manga[] = [];
+  sharedData = inject(SharedDataService);
+  manga: Manga = new Manga();
   chapterList: Chapter[] = [];
   chapterPages: ChapterPages = new ChapterPages();
   pdfMake = pdfFonts.pdfMake.vfs;
 
   displayBasic: boolean = false;
 
-  constructor(private http: HttpClient) {
-    this.mangaApi.search('Pluto',0).then(list => this.mangaList = list);
-  }
-
   ngOnInit(): void {
+    this.sharedData.selectedManga.subscribe(value => {
+      this.manga = value;
+    })
   }
 
   onMangaSelected(manga: Manga) {
-    this.mangaList = [manga];
+    this.manga = manga;
   }
 
   get markdown() {
-    return marked.parse(this.mangaList[0].description);
+    return marked.parse(this.manga.description);
   }
 
   openmanga(manga: any) {
