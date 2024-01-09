@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MangaAPIService } from "src/app/manga-api.service";
-import { SharedDataService } from "src/app/shared-data-service.service";
+import { SharedDataService } from "src/app/shared-data.service";
 import { Observable, Subject, debounceTime, distinctUntilChanged, from, switchMap } from 'rxjs';
 import { Manga } from "src/app/manga";
 @Component({
@@ -10,7 +10,8 @@ import { Manga } from "src/app/manga";
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Output() mangaSelected = new EventEmitter<any>();
+  // @Output() mangaSelected = new EventEmitter<any>();
+  sharedData = inject(SharedDataService);
   title = '';
   searchResults: any[] = [];
   searchTerms = new Subject<string>();
@@ -21,6 +22,7 @@ export class HeaderComponent {
       distinctUntilChanged(),
       switchMap(term => this.mangaApi.search(term, 0))
     ).subscribe(results => {
+      console.log(results);
       this.searchResults = results.map(manga => ({ ...manga }));
     });
   }
@@ -31,6 +33,7 @@ export class HeaderComponent {
   }
 
   selectManga(manga: any) {
-    this.mangaSelected.emit(manga);
+    // this.mangaSelected.emit(manga);
+    this.sharedData.setManga(manga);
   }
 }
