@@ -105,55 +105,32 @@
         {{manga.title_ja}} {{manga.title_ja_ro}}
     </div>
     <div class="tab">
-        <p-tabView>
+        <p-tabView (onChange)="onTabChange($event)">
             <p-tabPanel header="Description">
                 <div class="description" [innerHTML]="markdown"></div>
             </p-tabPanel>
-            <p-tabPanel header="Chapters ({{0}})">
-
-                <p-table  responsiveLayout="scroll">
+            <p-tabPanel header="Chapters ({{chapterList.length}})">
+                <p-table [value]="chapterList" responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th [width]="100">ID</th>
-                            <th [width]="700">Number</th>
+                            <th [width]="100">Chapter Number</th>
+                            <th [width]="700">Title</th>
                             <th [width]="100">Pages</th>
                             <th [width]="100"></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-section>
+                    <ng-template pTemplate="body" let-chapter>
                         <tr>
-                            <td>{{section.id}}</td>
-                            <td>{{section.section}}</td>
-                            <td>{{section.pages}}</td>
+                            <td>{{chapter.chapterNumber}}</td>
+                            <td>{{chapter.title ? chapter.title : ('Chapter ' + chapter.chapterNumber)}}</td>
+                            <td>{{chapter.pageNumber}}</td>
                             <td>
-                                <p-button icon="pi pi-eye" (onClick)="openmanga(manga.id)"></p-button>
+                                <p-button icon="pi pi-eye"></p-button>
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
-
             </p-tabPanel>
         </p-tabView>
     </div>
-</div>
 
-
-<p-dialog header={12} [(visible)]="displayBasic" [style]="{height: '100vh',width: '50vw'}">
-    <!-- <div  style="height:100%">
-        <ng-template ngSwitchCase="1" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/First.pdf"></ng2-pdfjs-viewer>
-        </ng-template>
-        <ng-template ngSwitchCase="2" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Second.pdf"></ng2-pdfjs-viewer>
-        </ng-template>
-        <ng-template ngSwitchCase="3" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Third.pdf"></ng2-pdfjs-viewer>
-        </ng-template>
-        <ng-template ngSwitchCase="4" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Fourth.pdf"></ng2-pdfjs-viewer>
-        </ng-template>
-        <ng-template ngSwitchCase="5" style="height:100%">
-            <ng2-pdfjs-viewer pdfSrc="/assets/Fifth.pdf"></ng2-pdfjs-viewer>
-        </ng-template>
-    </div> -->
-</p-dialog>

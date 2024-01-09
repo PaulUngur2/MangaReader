@@ -32,20 +32,31 @@ export class MainComponent implements OnInit{
   ngOnInit(): void {
     this.sharedData.selectedManga.subscribe(value => {
       this.manga = value;
-    })
+      this.loadChapters(this.manga.id);
+    });
+    this.mangaApi.search('Pluto', 0).then(results => {
+      this.manga = results[0];
+    });
   }
 
   onMangaSelected(manga: Manga) {
     this.manga = manga;
   }
 
+  onTabChange(event: any) {
+    if (event.index === 1 && this.manga) {
+      this.loadChapters(this.manga.id);
+    }
+  }
+
   get markdown() {
     return marked.parse(this.manga.description);
   }
 
-  openmanga(manga: any) {
-    this.displayBasic
-    this.mangaApi.getChapters(manga.id).then(list => this.chapterList = list);
+  loadChapters(mangaId: string) {
+    this.mangaApi.getChapters(mangaId).then(list => {
+      this.chapterList = list;
+    });
   }
 
 }
