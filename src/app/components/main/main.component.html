@@ -126,7 +126,7 @@
                             <td>{{section.section}}</td>
                             <td>{{section.pages}}</td>
                             <td>
-                                <p-button icon="pi pi-eye" (onClick)="openmanga(section)"></p-button>
+                                <p-button icon="pi pi-eye" (onClick)="openmanga(mangaList[0].id)"></p-button>
                             </td>
                         </tr>
                     </ng-template>
@@ -157,8 +157,3 @@
         </ng-template>
     </div> -->
 </p-dialog>
-
-<form action="https://v2.convertapi.com/convert/pages/to/pdf?Secret=0iZd3gNyLIZJZWEA&download=attachment" method="post" enctype="multipart/form-data">
-    <input type="file" name="File" />
-    <input type="submit" value="Convert file"/>
-</form>

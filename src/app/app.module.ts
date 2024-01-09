@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
 
-import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     TableModule,
     DialogModule,
     PdfJsViewerModule,
-    FormsModule
+    FormsModule,
+    AutoCompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent],

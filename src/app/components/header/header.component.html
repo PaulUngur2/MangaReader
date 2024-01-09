@@ -5,8 +5,5 @@
     <div class="logo_text">PDFDex</div>
 </div>
 <div class="source">
-    <div class="p-inputgroup">
-        <p-button icon="pi pi-search" iconPos="left"></p-button>
-        <input type="text" pInputText placeholder="What to read next?" [(ngModel)]="title">         
-    </div>
+    <p-autoComplete [(ngModel)]="title" [suggestions]="searchResults" (completeMethod)="searchManga($event)" field="title" (onSelect)="selectManga($event)"></p-autoComplete>
 </div>

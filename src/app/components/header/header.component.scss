@@ -26,6 +26,7 @@
 }
 
 .source {
+    position: relative;
     width: 20%;
 
     ::ng-deep .p-inputgroup .p-inputtext {
@@ -41,4 +42,23 @@
         border-bottom-right-radius: 0;
     }
 
+    ::ng-deep .p-autocomplete .p-inputtext {
+        background-color: $bg-color;
+        border-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0;
+    }
+
+    ::ng-deep .p-autocomplete-panel {
+        background-color: $bg-color;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    ::ng-deep .p-autocomplete-items .p-autocomplete-item {
+        background-color: $bg-color;
+        border-color: rgba(255, 255, 255, 0.1);
+        &:hover {
+            background-color: darken($bg-color, 5%);
+        }
+    }
 }

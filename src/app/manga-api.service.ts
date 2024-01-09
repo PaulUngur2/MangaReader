@@ -4,6 +4,7 @@ import axios from "axios";
 import {Manga} from "./manga";
 import {Chapter} from "./chapter";
 import {ChapterPages} from "./chapter-pages";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

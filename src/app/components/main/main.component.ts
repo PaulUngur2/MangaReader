@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import {
   LinkAnnotationService, BookmarkViewService, MagnificationService, ThumbnailViewService,
@@ -8,7 +8,6 @@ import {
 import * as marked from 'marked';
 import { Chapter } from 'src/app/chapter';
 import { ChapterPages } from 'src/app/chapter-pages';
-// import { ConvertImgPdfService } from 'src/app/convert-img-pdf.service';
 import { Manga } from 'src/app/manga';
 import { MangaAPIService } from 'src/app/manga-api.service';
 import * as pdfMake from "pdfmake/build/pdfmake"; 
@@ -19,9 +18,8 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
+export class MainComponent implements OnInit{
   mangaApi = inject(MangaAPIService);
-  // convertAPI = inject(ConvertImgPdfService);
   mangaList: Manga[] = [];
   chapterList: Chapter[] = [];
   chapterPages: ChapterPages = new ChapterPages();
@@ -30,20 +28,23 @@ export class MainComponent {
   displayBasic: boolean = false;
 
   constructor(private http: HttpClient) {
-    this.initmanga();
+    this.mangaApi.search('Pluto',0).then(list => this.mangaList = list);
+  }
+
+  ngOnInit(): void {
+  }
+
+  onMangaSelected(manga: Manga) {
+    this.mangaList = [manga];
   }
 
   get markdown() {
     return marked.parse(this.mangaList[0].description);
   }
 
-  initmanga() {
-    this.mangaApi.search('Rent A Girlfriend',0).then(list => this.mangaList = list);
-    // this.mangaApi.getChapters(this.mangaList[0].id).then(list => this.chapterList = list);
-  }
-
   openmanga(manga: any) {
-    this.displayBasic = true;
+    this.displayBasic
+    this.mangaApi.getChapters(manga.id).then(list => this.chapterList = list);
   }
 
 }
